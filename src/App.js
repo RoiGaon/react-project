@@ -9,7 +9,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
-    <div>
+    <>
       <Switch>
         <Route path="/" exact={true}>
           <SignInPage />
@@ -32,7 +32,7 @@ function App() {
           </Route>
         </Layout>
       </Switch>
-    </div>
+    </>
   );
 }
 

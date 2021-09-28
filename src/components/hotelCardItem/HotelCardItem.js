@@ -22,7 +22,7 @@ function HotelCardItem(props) {
   }
 
   return (
-    <li className={classes.item}>
+    <li className="item fl w-30 ma3">
       <Card>
         <div className={classes.image}>
           <img src={props.image} alt={props.title} />

@@ -5,16 +5,13 @@ function NewCardPage() {
   const history = useHistory();
 
   function addHotelHandler(hotelData) {
-    fetch(
-      "https://react-getting-started-81fb6-default-rtdb.europe-west1.firebasedatabase.app/meetups.json",
-      {
-        method: "POST",
-        body: JSON.stringify(hotelData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch("https://react-final-pro-default-rtdb.firebaseio.com/hotels.json", {
+      method: "POST",
+      body: JSON.stringify(hotelData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then(() => {
         console.log("post sent successfully");
         history.replace("/all-cards");
@@ -24,7 +21,7 @@ function NewCardPage() {
 
   return (
     <section>
-      <h1>Add New Card</h1>
+      <h1 className="tc">Add New Card</h1>
       <NewCard addHotel={addHotelHandler} />
     </section>
   );

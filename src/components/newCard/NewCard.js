@@ -26,8 +26,8 @@ function NewCard(props) {
   }
 
   return (
-    <Card>
-      <form className={classes.form} onSubmit={inputHandler}>
+    <form className={classes.form} onSubmit={inputHandler}>
+      <Card>
         <div className={classes.control}>
           <label htmlFor="title">Card Title: </label>
           <input type="text" id="title" required ref={titleInputRef} />
@@ -52,8 +52,8 @@ function NewCard(props) {
         <div className={classes.actions}>
           <button>Add Card</button>
         </div>
-      </form>
-    </Card>
+      </Card>
+    </form>
   );
 }
 
