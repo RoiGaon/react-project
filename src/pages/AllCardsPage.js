@@ -3,27 +3,21 @@ import HotelCardList from "../components/hotelCardList/HotelCardList";
 import SearchBox from "../components/searchbox/searchbox";
 import Scroll from "../components/scroll/scroll";
 
-function AllCardsPage() {
+function AllCardsPage({ user }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedCards, setLoadedCards] = useState([]);
   const [searchfield, setSearchfield] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://react-final-pro-default-rtdb.firebaseio.com/hotels.json")
+    fetch("http://localhost:3000/api/cards")
       .then((response) => response.json())
       .then((data) => {
-        const cards = [];
-        for (let key in data) {
-          const card = {
-            id: key,
-            ...data[key],
-          };
-          cards.push(card);
-        }
+        setLoadedCards(data);
         setIsLoading(false);
-        setLoadedCards(cards);
-      });
+      })
+      .catch((error) => console.log(error));
+    return () => console.log("cleanUp");
   }, []);
 
   function onSearchChange(event) {
@@ -31,7 +25,7 @@ function AllCardsPage() {
   }
 
   const filteredCards = loadedCards.filter((card) => {
-    return card.title.toLowerCase().includes(searchfield.toLowerCase());
+    return card.bizName.toLowerCase().includes(searchfield.toLowerCase());
   });
 
   if (isLoading) {
@@ -40,11 +34,11 @@ function AllCardsPage() {
 
   return (
     <div>
-      <h1 className="tc">Choose An Hotel!</h1>
+      <h1 className="tc">Choose Hotels!</h1>
       <SearchBox searchChange={onSearchChange} />
       <br />
       <Scroll>
-        <HotelCardList cards={filteredCards} />
+        <HotelCardList cards={filteredCards} user={user} />
       </Scroll>
     </div>
   );

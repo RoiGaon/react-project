@@ -1,43 +1,23 @@
-import { Route, Switch } from "react-router-dom";
-import Layout from "./layout/Layout";
-import SignInPage from "./pages/SignInPage";
-import AllCardsPage from "./pages/AllCardsPage";
-import RegisterPage from "./pages/RegisterPage";
-import AboutPage from "./pages/AboutPage";
-import NewCardPage from "./pages/NewCardPage";
-import FavoritesPage from "./pages/FavoritesPage";
+import { useState, useEffect } from "react";
+import CompleteNavBar from "./components/navigation/CompleteNavBar";
+import { ToastContainer } from "react-toastify";
+import { getMeData } from "./helpers/fetcher";
 
 function App() {
+  const [userDetails, setUserDetails] = useState({});
+  console.log(userDetails);
+  useEffect(() => {
+    getMeData(localStorage.getItem("token"), (data) => {
+      setUserDetails(data);
+    });
+  }, []);
+
   return (
     <>
-      <Switch>
-        <Route path="/" exact={true}>
-          <SignInPage />
-        </Route>
-        <Route path="/register">
-          <RegisterPage />
-        </Route>
-        <Layout>
-          <Route path="/all-cards">
-            <AllCardsPage />
-          </Route>
-          <Route path="/new-card">
-            <NewCardPage />
-          </Route>
-          <Route path="/favorites">
-            <FavoritesPage />
-          </Route>
-          <Route path="/about">
-            <AboutPage />
-          </Route>
-        </Layout>
-      </Switch>
+      <CompleteNavBar user={userDetails} set={setUserDetails} />
+      <ToastContainer />
     </>
   );
 }
-
-// app.use("/api/users", users);
-// app.use("/api/auth", auth);
-// app.use("/api/cards", cards);
 
 export default App;

@@ -1,12 +1,9 @@
-// import classes from "./Layout.module.css";
-import Navbar from "./Navbar";
+import classes from "./Layout.module.css";
 
 function Layout(props) {
   return (
     <>
-      <Navbar />
-      <main>{props.children}</main>
-      {/* className={classes.main} */}
+      <main className={classes.main}>{props.children}</main>
     </>
   );
 }

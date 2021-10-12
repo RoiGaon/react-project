@@ -5,40 +5,49 @@ import classes from "./HotelCardItem.module.css";
 
 function HotelCardItem(props) {
   const favoritesCtx = useContext(FavoritesContext);
-  const itemIsFavorite = favoritesCtx.isItemFavorite(props.id);
+  const itemIsFavorite = favoritesCtx.isItemFavorite(props._id);
 
   function toggleFavoritesStatusHandler() {
     if (itemIsFavorite) {
-      favoritesCtx.removeFavorites(props.id);
+      favoritesCtx.removeFavorites(props._id);
     } else {
       favoritesCtx.addFavorites({
-        id: props.id,
-        title: props.title,
-        image: props.image,
-        address: props.address,
-        description: props.description,
+        _id: props._id,
+        bizName: props.bizName,
+        bizImage: props.bizImage,
+        bizPhone: props.bizPhone,
+        bizAddress: props.bizAddress,
+        bizDescription: props.bizDescription,
+        userId: props.user._id,
       });
     }
   }
 
   return (
-    <li className="item fl w-30 ma3">
-      <Card>
+    <Card width={30}>
+      <div className={classes.item}>
         <div className={classes.image}>
-          <img src={props.image} alt={props.title} />
+          <img src={props.bizImage} alt={props.title} />
         </div>
         <div className={classes.content}>
-          <h3>{props.title}</h3>
-          <address>{props.address}</address>
-          <p>{props.description}</p>
+          <h3>{props.bizName}</h3>
+          <address>{props.bizAddress}</address>
+          <p>{props.bizPhone}</p>
+          <p>{props.bizDescription}</p>
         </div>
         <div className={classes.actions}>
           <button onClick={toggleFavoritesStatusHandler}>
             {itemIsFavorite ? "Remove From Favorites" : "Add To Favorites"}
           </button>
         </div>
-      </Card>
-    </li>
+        <br />
+        {props.user.biz ? (
+          <div className={classes.actions}>
+            <button onClick={() => {}}>Delete Card</button>
+          </div>
+        ) : null}
+      </div>
+    </Card>
   );
 }
 

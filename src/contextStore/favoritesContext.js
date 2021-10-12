@@ -11,6 +11,15 @@ const FavoritesContext = createContext({
 export function FavoritesContextProvider(props) {
   const [userFavorites, setUserFavorites] = useState([]);
 
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/api/users/cards/favorites")
+  //     .then((response) => response.json())
+  //     .then((data) => setUserFavorites(data));
+  //   return () => {
+  //     console.log("cleanUp");
+  //   };
+  // }, [userFavorites]);
+
   function addFavoritesHandler(favoriteCard) {
     setUserFavorites((prevUserFavorites) => {
       return prevUserFavorites.concat(favoriteCard);
@@ -19,12 +28,12 @@ export function FavoritesContextProvider(props) {
 
   function removeFavoritesHandler(cardId) {
     setUserFavorites((prevUserFavorites) => {
-      return prevUserFavorites.filter((card) => cardId !== card.id);
+      return prevUserFavorites.filter((card) => cardId !== card._id);
     });
   }
 
   function isItemFavoriteHandler(cardId) {
-    return userFavorites.some((card) => cardId === card.id);
+    return userFavorites.some((card) => cardId === card._id);
   }
 
   const context = {
@@ -43,3 +52,20 @@ export function FavoritesContextProvider(props) {
 }
 
 export default FavoritesContext;
+
+// function addFavoritesHandler(favoriteCard) {
+//   fetch("http://localhost:3000/api/users/cards/favorites", {
+//     method: "POST",
+//     body: JSON.stringify(favoriteCard),
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) =>
+//       setUserFavorites((prevUserFavorites) => {
+//         return prevUserFavorites.concat(data);
+//       })
+//     )
+//     .catch((error) => console.log(error));
+// }

@@ -1,37 +1,73 @@
-import { useContext } from "react";
-import FavoritesContext from "../contextStore/favoritesContext";
+import { useHistory } from "react-router-dom";
 import classes from "./Navbar.module.css";
+import classes2 from "./SecondNavbar.module.css";
 import { Link } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
+import { tabs } from "../helpers/tabs/tabs";
 
-function Navbar() {
-  const favoritesCtx = useContext(FavoritesContext);
+function Navbar(props) {
+  const { user, set } = props;
+  const history = useHistory();
+
+  function onLogOut() {
+    localStorage.clear();
+    set({});
+    history.replace("/");
+  }
   return (
-    <header className={classes.header}>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/all-cards">Home</Link>
-          </li>
-          <li>
-            <Link to="/new-card">New Card</Link>
-          </li>
-          <li>
-            <Link to="/favorites">
-              Favorites
-              <span className={classes.badge}>
-                {favoritesCtx.totalFavorites}
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-      </nav>
-      <div className={classes.logout}>
-        <Link to="/">LogOut</Link>
-      </div>
-    </header>
+    <>
+      {user._id ? (
+        <header className={classes.header}>
+          <nav>
+            <ul>
+              {user._id && user.biz
+                ? tabs
+                    .filter((tab) => tab.loggedIn)
+                    .map((tab, index) => (
+                      <li key={index}>
+                        <Link to={tab.href}>
+                          {tab.icon} {tab.name}
+                        </Link>
+                      </li>
+                    ))
+                : tabs
+                    .filter((tab) => tab.notBiz)
+                    .map((tab, index) => (
+                      <li key={index}>
+                        <Link to={tab.href}>
+                          {tab.icon} {tab.name}
+                        </Link>
+                      </li>
+                    ))}
+            </ul>
+          </nav>
+          <div>
+            <button
+              className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib lightest-blue"
+              onClick={() => onLogOut()}
+            >
+              <FaSignOutAlt></FaSignOutAlt> LogOut
+            </button>
+          </div>
+        </header>
+      ) : (
+        <header className={classes2.header}>
+          <nav>
+            <ul>
+              {tabs
+                .filter((tab) => !tab.loggedIn)
+                .map((tab, index) => (
+                  <li key={index}>
+                    <Link to={tab.href}>
+                      {tab.icon} {tab.name}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </nav>
+        </header>
+      )}
+    </>
   );
 }
 

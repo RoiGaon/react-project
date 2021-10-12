@@ -7,19 +7,22 @@ function NewCard(props) {
   const imageInputRef = useRef();
   const addressInputRef = useRef();
   const descriptionInputRef = useRef();
+  const phoneInputRef = useRef();
 
   function inputHandler(event) {
     event.preventDefault();
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
+    const enteredPhone = phoneInputRef.current.value;
     const enteredAddress = addressInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
     const hotelData = {
-      title: enteredTitle,
-      image: enteredImage,
-      address: enteredAddress,
-      description: enteredDescription,
+      bizName: enteredTitle,
+      bizImage: enteredImage,
+      bizAddress: enteredAddress,
+      bizDescription: enteredDescription,
+      bizPhone: enteredPhone,
     };
 
     props.addHotel(hotelData);
@@ -27,21 +30,25 @@ function NewCard(props) {
 
   return (
     <form className={classes.form} onSubmit={inputHandler}>
-      <Card>
+      <Card width={100}>
         <div className={classes.control}>
-          <label htmlFor="title">Card Title: </label>
-          <input type="text" id="title" required ref={titleInputRef} />
+          <label htmlFor="name">Biz Name: </label>
+          <input type="text" id="name" required ref={titleInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="image">Card Image: </label>
+          <label htmlFor="image">Biz Image: </label>
           <input type="url" id="image" required ref={imageInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="address">Card Address: </label>
+          <label htmlFor="address">Biz Address: </label>
           <input type="text" id="address" required ref={addressInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="description">Card description: </label>
+          <label htmlFor="phone">Biz Phone: </label>
+          <input type="phone" id="phone" required ref={phoneInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="description">Biz description: </label>
           <textarea
             rows="4"
             id="description"

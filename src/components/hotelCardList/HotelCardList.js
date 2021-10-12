@@ -1,20 +1,21 @@
 import HotelCardItem from "../hotelCardItem/HotelCardItem";
-import classes from "./HotelCardList.module.css";
 
 function HotelCardList(props) {
   return (
-    <ul className={classes.list}>
+    <div className="tc">
       {props.cards.map((card) => (
         <HotelCardItem
-          key={card.id}
-          id={card.id}
-          image={card.image}
-          title={card.title}
-          address={card.address}
-          description={card.description}
+          key={card._id}
+          _id={card._id}
+          bizImage={card.bizImage}
+          bizName={card.bizName}
+          bizPhone={card.bizPhone}
+          bizAddress={card.bizAddress}
+          bizDescription={card.bizDescription}
+          user={props.user}
         />
       ))}
-    </ul>
+    </div>
   );
 }
 

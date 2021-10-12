@@ -5,8 +5,7 @@ function Scroll(props) {
         overflow: "scroll",
         overflowX: "hidden",
         border: "5px solid black",
-        height: "650px",
-        width: "100vw",
+        height: "700px",
       }}
     >
       {props.children}

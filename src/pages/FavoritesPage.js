@@ -2,8 +2,9 @@ import { useContext, useState } from "react";
 import HotelCardList from "../components/hotelCardList/HotelCardList";
 import SearchBox from "../components/searchbox/searchbox";
 import FavoritesContext from "../contextStore/favoritesContext";
+import classes from "../layout/Navbar.module.css";
 
-function FavoritesPage() {
+function FavoritesPage({ user }) {
   const [searchfield, setSearchfield] = useState("");
   const favoritesCtx = useContext(FavoritesContext);
 
@@ -12,7 +13,7 @@ function FavoritesPage() {
   }
 
   const filteredFavorites = favoritesCtx.favorites.filter((card) => {
-    return card.title.toLowerCase().includes(searchfield.toLowerCase());
+    return card.bizName.toLowerCase().includes(searchfield.toLowerCase());
   });
 
   let content;
@@ -23,14 +24,17 @@ function FavoritesPage() {
     content = (
       <>
         <SearchBox searchChange={onSearchChange} />
-        <HotelCardList cards={filteredFavorites} />
+        <HotelCardList cards={filteredFavorites} user={user} />
       </>
     );
   }
 
   return (
     <section className="tc">
-      <h1 className="tc">My Favorites</h1>
+      <h1 className="tc">
+        My Favorites
+        <span className={classes.badge}>{favoritesCtx.totalFavorites}</span>
+      </h1>
       {content}
     </section>
   );
