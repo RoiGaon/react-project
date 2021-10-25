@@ -41,8 +41,8 @@ export default function SignInForm({ onSubmitSignIn = (f) => f }) {
               <input
                 onClick={() => {
                   let errorOrData = validateSignIn(
-                    emailInputRef,
-                    passwordInputRef
+                    emailInputRef.current.value,
+                    passwordInputRef.current.value
                   );
                   if (typeof errorOrData === "string") {
                     toast(errorOrData);

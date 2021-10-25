@@ -60,9 +60,9 @@ export default function RegistrationForm({
               <input
                 onClick={() => {
                   let validatioErrorOrData = validateSimpleRegistration(
-                    emailInputRef,
-                    passwordInputRef,
-                    nameInputRef,
+                    emailInputRef.current.value,
+                    passwordInputRef.current.value,
+                    nameInputRef.current.value,
                     isBiz
                   );
                   if (typeof validatioErrorOrData === "string") {
