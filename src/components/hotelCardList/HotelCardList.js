@@ -1,9 +1,9 @@
 import HotelCardItem from "../hotelCardItem/HotelCardItem";
 
-function HotelCardList(props) {
+export default function HotelCardList({ cards, user, delOption }) {
   return (
     <div className="tc">
-      {props.cards.map((card) => (
+      {cards.map((card) => (
         <HotelCardItem
           key={card._id}
           _id={card._id}
@@ -12,11 +12,10 @@ function HotelCardList(props) {
           bizPhone={card.bizPhone}
           bizAddress={card.bizAddress}
           bizDescription={card.bizDescription}
-          user={props.user}
+          user={user}
+          delOption={delOption}
         />
       ))}
     </div>
   );
 }
-
-export default HotelCardList;

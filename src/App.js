@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import * as React from "react";
 import CompleteNavBar from "./components/navigation/CompleteNavBar";
 import { ToastContainer } from "react-toastify";
 import { getMeData } from "./helpers/fetcher";
 
 function App() {
-  const [userDetails, setUserDetails] = useState({});
-  console.log(userDetails);
-  useEffect(() => {
+  const [userDetails, setUserDetails] = React.useState({});
+  React.useEffect(() => {
     getMeData(localStorage.getItem("token"), (data) => {
       setUserDetails(data);
     });

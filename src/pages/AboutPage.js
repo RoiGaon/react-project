@@ -1,9 +1,8 @@
-function AboutPage() {
+export default function AboutPage() {
   return (
-    <div>
-      <h1>The About Page</h1>
-    </div>
+    <>
+      <br />
+      <h1 className="tc">The About Page</h1>
+    </>
   );
 }
-
-export default AboutPage;

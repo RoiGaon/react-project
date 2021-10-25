@@ -1,4 +1,4 @@
-function Scroll(props) {
+export default function Scroll({ children }) {
   return (
     <div
       style={{
@@ -8,9 +8,7 @@ function Scroll(props) {
         height: "700px",
       }}
     >
-      {props.children}
+      {children}
     </div>
   );
 }
-
-export default Scroll;

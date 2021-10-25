@@ -3,7 +3,7 @@ import NewCard from "../components/newCard/NewCard";
 import { insertNewCard } from "../helpers/fetcher";
 import { toast } from "react-toastify";
 
-function NewCardPage() {
+export default function NewCardPage() {
   const history = useHistory();
 
   function addHotelHandler(hotelData) {
@@ -11,27 +11,13 @@ function NewCardPage() {
       toast("Added Successfully!");
       history.push("/all-cards");
     });
-
-    // fetch("https://react-final-pro-default-rtdb.firebaseio.com/hotels.json", {
-    //   method: "POST",
-    //   body: JSON.stringify(hotelData),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then(() => {
-    //     console.log("post sent successfully");
-    //     history.replace("/all-cards");
-    //   })
-    //   .catch((err) => console.log(err));
   }
 
   return (
     <section>
+      <br />
       <h1 className="tc">Add New Card</h1>
       <NewCard addHotel={addHotelHandler} />
     </section>
   );
 }
-
-export default NewCardPage;

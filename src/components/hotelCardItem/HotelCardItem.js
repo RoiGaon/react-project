@@ -3,37 +3,46 @@ import FavoritesContext from "../../contextStore/favoritesContext";
 import Card from "../cardUI/Card";
 import classes from "./HotelCardItem.module.css";
 
-function HotelCardItem(props) {
+export default function HotelCardItem({
+  _id,
+  bizName,
+  bizImage,
+  bizPhone,
+  bizAddress,
+  bizDescription,
+  user,
+  delOption,
+}) {
   const favoritesCtx = useContext(FavoritesContext);
-  const itemIsFavorite = favoritesCtx.isItemFavorite(props._id);
+  const itemIsFavorite = favoritesCtx.isItemFavorite(_id);
 
   function toggleFavoritesStatusHandler() {
     if (itemIsFavorite) {
-      favoritesCtx.removeFavorites(props._id);
+      favoritesCtx.removeFavorites(_id);
     } else {
       favoritesCtx.addFavorites({
-        _id: props._id,
-        bizName: props.bizName,
-        bizImage: props.bizImage,
-        bizPhone: props.bizPhone,
-        bizAddress: props.bizAddress,
-        bizDescription: props.bizDescription,
-        userId: props.user._id,
+        _id: _id,
+        bizName: bizName,
+        bizImage: bizImage,
+        bizPhone: bizPhone,
+        bizAddress: bizAddress,
+        bizDescription: bizDescription,
+        userId: user._id,
       });
     }
   }
 
   return (
-    <Card width={30}>
+    <Card width={`w-30-l w-70-m`}>
       <div className={classes.item}>
         <div className={classes.image}>
-          <img src={props.bizImage} alt={props.title} />
+          <img src={bizImage} alt={bizName} />
         </div>
         <div className={classes.content}>
-          <h3>{props.bizName}</h3>
-          <address>{props.bizAddress}</address>
-          <p>{props.bizPhone}</p>
-          <p>{props.bizDescription}</p>
+          <h3>{bizName}</h3>
+          <address>{bizAddress}</address>
+          <p>{bizPhone}</p>
+          <p>{bizDescription}</p>
         </div>
         <div className={classes.actions}>
           <button onClick={toggleFavoritesStatusHandler}>
@@ -41,7 +50,7 @@ function HotelCardItem(props) {
           </button>
         </div>
         <br />
-        {props.user.biz ? (
+        {user.biz && delOption ? (
           <div className={classes.actions}>
             <button onClick={() => {}}>Delete Card</button>
           </div>
@@ -50,5 +59,3 @@ function HotelCardItem(props) {
     </Card>
   );
 }
-
-export default HotelCardItem;

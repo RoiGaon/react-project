@@ -1,9 +1,13 @@
 import validateSimpleRegistration from "../../helpers/Registration";
 import { toast } from "react-toastify";
-const notify = (message) => toast(message);
 
-function RegistrationForm(props) {
-  const { onRegistration = (f) => f, name, isBiz } = props;
+export default function RegistrationForm({
+  onRegistration = (f) => f,
+  name,
+  isBiz,
+  setIsBiz,
+}) {
+  const notify = (message) => toast(message);
   return (
     <>
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -64,6 +68,9 @@ function RegistrationForm(props) {
                 type="submit"
                 value={name}
               />
+              <p className=" grow pointer" onClick={() => setIsBiz(!isBiz)}>
+                {!isBiz ? "Biz-Register" : "Register"}
+              </p>
             </div>
           </div>
         </main>
@@ -71,5 +78,3 @@ function RegistrationForm(props) {
     </>
   );
 }
-
-export default RegistrationForm;

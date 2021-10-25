@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import * as React from "react";
 import HotelCardList from "../components/hotelCardList/HotelCardList";
 import SearchBox from "../components/searchbox/searchbox";
 import FavoritesContext from "../contextStore/favoritesContext";
-import classes from "../layout/Navbar.module.css";
+import classes from "../components/navigation/Navbar.module.css";
 
-function FavoritesPage({ user }) {
-  const [searchfield, setSearchfield] = useState("");
-  const favoritesCtx = useContext(FavoritesContext);
+export default function FavoritesPage({ user }) {
+  const [searchfield, setSearchfield] = React.useState("");
+  const favoritesCtx = React.useContext(FavoritesContext);
 
   function onSearchChange(event) {
     setSearchfield(event.target.value);
@@ -31,6 +31,7 @@ function FavoritesPage({ user }) {
 
   return (
     <section className="tc">
+      <br />
       <h1 className="tc">
         My Favorites
         <span className={classes.badge}>{favoritesCtx.totalFavorites}</span>
@@ -39,5 +40,3 @@ function FavoritesPage({ user }) {
     </section>
   );
 }
-
-export default FavoritesPage;

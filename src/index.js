@@ -3,10 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import "tachyons";
+import "bootstrap/dist/css/bootstrap.css";
 import { FavoritesContextProvider } from "./contextStore/favoritesContext";
-// import { UserContextProvider } from "./contextStore/userContext";
-//   <UserContextProvider>
-//   </UserContextProvider>
 import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
@@ -15,3 +13,7 @@ ReactDOM.render(
   </FavoritesContextProvider>,
   document.getElementById("root")
 );
+
+// import { UserContextProvider } from "./contextStore/userContext";
+//   <UserContextProvider>
+//   </UserContextProvider>

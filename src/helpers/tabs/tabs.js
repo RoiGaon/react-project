@@ -2,24 +2,33 @@ import AllCardsPage from "../../pages/AllCardsPage";
 import AboutPage from "../../pages/AboutPage";
 import NewCardPage from "../../pages/NewCardPage";
 import FavoritesPage from "../../pages/FavoritesPage";
-import BizRegisterPage from "../../pages/BizRegisterPage";
 import RegisterPage from "../../pages/RegisterPage";
 import SignInPage from "../../pages/SignInPage";
-import { BiHome } from "react-icons/bi";
-import { FcAbout } from "react-icons/fc";
+import { VscHome } from "react-icons/vsc";
+import { BiInfoSquare } from "react-icons/bi";
 import { CgCardSpades } from "react-icons/cg";
-import { GrNewWindow } from "react-icons/gr";
+import { BiAddToQueue } from "react-icons/bi";
 import { BiRegistered } from "react-icons/bi";
+import { BsPersonBoundingBox } from "react-icons/bs";
 import { FaSignInAlt } from "react-icons/fa";
+import ProfilePage from "../../pages/ProfilePage";
 
 export const tabs = [
+  {
+    name: "Profile",
+    href: "/profile",
+    page: ProfilePage,
+    loggedIn: true,
+    notBiz: false,
+    icon: <BsPersonBoundingBox></BsPersonBoundingBox>,
+  },
   {
     name: "Home",
     href: "/all-cards",
     page: AllCardsPage,
     loggedIn: true,
     notBiz: true,
-    icon: <BiHome></BiHome>,
+    icon: <VscHome></VscHome>,
   },
   {
     name: "About",
@@ -27,7 +36,7 @@ export const tabs = [
     page: AboutPage,
     loggedIn: true,
     notBiz: true,
-    icon: <FcAbout></FcAbout>,
+    icon: <BiInfoSquare></BiInfoSquare>,
   },
   {
     name: "New Card",
@@ -35,7 +44,7 @@ export const tabs = [
     page: NewCardPage,
     loggedIn: true,
     notBiz: false,
-    icon: <GrNewWindow></GrNewWindow>,
+    icon: <BiAddToQueue></BiAddToQueue>,
   },
   {
     name: "Favorites",
@@ -51,13 +60,6 @@ export const tabs = [
     page: SignInPage,
     loggedIn: false,
     icon: <FaSignInAlt></FaSignInAlt>,
-  },
-  {
-    name: "Biz Register",
-    href: "/biz-register",
-    page: BizRegisterPage,
-    loggedIn: false,
-    icon: <BiRegistered></BiRegistered>,
   },
   {
     name: "Register",

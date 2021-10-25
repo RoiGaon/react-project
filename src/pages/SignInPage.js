@@ -3,8 +3,7 @@ import SignInForm from "../components/forms/SignInForm";
 import { toast } from "react-toastify";
 import { getMeData, signInUser } from "../helpers/fetcher";
 
-function SignInPage(props) {
-  const { set } = props;
+export default function SignInPage({ set }) {
   const history = useHistory();
 
   function signIn(data) {
@@ -28,5 +27,3 @@ function SignInPage(props) {
     </>
   );
 }
-
-export default SignInPage;

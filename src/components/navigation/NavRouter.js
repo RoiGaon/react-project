@@ -1,8 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import { tabs } from "../../helpers/tabs/tabs";
 
-function NavRouter(props) {
-  const { user, set } = props;
+export default function NavRouter({ user, set }) {
   return (
     <Switch>
       {tabs.map((tab, index) => (
@@ -13,5 +12,3 @@ function NavRouter(props) {
     </Switch>
   );
 }
-
-export default NavRouter;

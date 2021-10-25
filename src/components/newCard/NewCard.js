@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Card from "../cardUI/Card";
 import classes from "./NewCard.module.css";
 
-function NewCard(props) {
+export default function NewCard({ addHotel = (f) => f }) {
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
@@ -25,12 +25,12 @@ function NewCard(props) {
       bizPhone: enteredPhone,
     };
 
-    props.addHotel(hotelData);
+    addHotel(hotelData);
   }
 
   return (
     <form className={classes.form} onSubmit={inputHandler}>
-      <Card width={100}>
+      <Card width={`w-100`}>
         <div className={classes.control}>
           <label htmlFor="name">Biz Name: </label>
           <input type="text" id="name" required ref={titleInputRef} />
@@ -63,5 +63,3 @@ function NewCard(props) {
     </form>
   );
 }
-
-export default NewCard;

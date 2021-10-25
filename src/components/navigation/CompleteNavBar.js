@@ -1,15 +1,12 @@
-import Navbar from "../../layout/Navbar";
+import NavbarComp from "./Navbar";
 import NavRouter from "./NavRouter";
 import { BrowserRouter } from "react-router-dom";
 
-function CompleteNavBar(props) {
-  const { user, set } = props;
+export default function CompleteNavBar({ user, set }) {
   return (
     <BrowserRouter>
-      <Navbar user={user} set={set} />
+      <NavbarComp user={user} set={set} />
       <NavRouter set={set} user={user} />
     </BrowserRouter>
   );
 }
-
-export default CompleteNavBar;
