@@ -2,6 +2,7 @@ import * as React from "react";
 import HotelCardList from "../components/hotelCardList/HotelCardList";
 import SearchBox from "../components/searchbox/searchbox";
 import Scroll from "../components/scroll/scroll";
+import { getAllCards } from "../helpers/fetcher";
 
 export default function AllCardsPage({ user }) {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -10,13 +11,10 @@ export default function AllCardsPage({ user }) {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/api/cards")
-      .then((response) => response.json())
-      .then((data) => {
-        setLoadedCards(data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
+    getAllCards((data) => {
+      setLoadedCards(data);
+      setIsLoading(false);
+    });
     return () => console.log("cleanUp");
   }, []);
 

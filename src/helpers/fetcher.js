@@ -28,6 +28,14 @@ export function getMeData(token, callback) {
     .catch((x) => callback(x));
 }
 
+export function getAllCards(callback) {
+  let url = baseUrl + "/api/cards";
+  fetch(url)
+    .then((x) => x.json())
+    .then((x) => callback(x))
+    .catch((x) => callback(x));
+}
+
 export function getMeCards(token, callback) {
   let url = baseUrl + "/api/users/mecards";
   fetch(url, { headers: { "x-auth-token": token } })
