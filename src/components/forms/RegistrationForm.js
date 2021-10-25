@@ -1,3 +1,4 @@
+import * as React from "react";
 import validateSimpleRegistration from "../../helpers/Registration";
 import { toast } from "react-toastify";
 
@@ -7,6 +8,9 @@ export default function RegistrationForm({
   isBiz,
   setIsBiz,
 }) {
+  const nameInputRef = React.useRef("");
+  const emailInputRef = React.useRef("");
+  const passwordInputRef = React.useRef("");
   const notify = (message) => toast(message);
   return (
     <>
@@ -24,6 +28,7 @@ export default function RegistrationForm({
                   type="text"
                   name="name"
                   id="name"
+                  ref={nameInputRef}
                 />
               </div>
               <div className="mt3">
@@ -35,6 +40,7 @@ export default function RegistrationForm({
                   type="email"
                   name="email-address"
                   id="email-address"
+                  ref={emailInputRef}
                 />
               </div>
               <div className="mv3">
@@ -46,6 +52,7 @@ export default function RegistrationForm({
                   type="password"
                   name="password"
                   id="password"
+                  ref={passwordInputRef}
                 />
               </div>
             </fieldset>
@@ -53,9 +60,9 @@ export default function RegistrationForm({
               <input
                 onClick={() => {
                   let validatioErrorOrData = validateSimpleRegistration(
-                    "email-address",
-                    "password",
-                    "name",
+                    emailInputRef,
+                    passwordInputRef,
+                    nameInputRef,
                     isBiz
                   );
                   if (typeof validatioErrorOrData === "string") {

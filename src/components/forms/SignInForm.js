@@ -1,7 +1,10 @@
+import * as React from "react";
 import validateSignIn from "../../helpers/SignInHelper";
 import { toast } from "react-toastify";
 
 export default function SignInForm({ onSubmitSignIn = (f) => f }) {
+  const emailInputRef = React.useRef("");
+  const passwordInputRef = React.useRef("");
   return (
     <>
       <article className=" br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -18,6 +21,7 @@ export default function SignInForm({ onSubmitSignIn = (f) => f }) {
                   type="email"
                   name="email-address"
                   id="email-address"
+                  ref={emailInputRef}
                 />
               </div>
               <div className="mv3">
@@ -29,13 +33,17 @@ export default function SignInForm({ onSubmitSignIn = (f) => f }) {
                   type="password"
                   name="password"
                   id="password"
+                  ref={passwordInputRef}
                 />
               </div>
             </fieldset>
             <div className="tc">
               <input
                 onClick={() => {
-                  let errorOrData = validateSignIn("email-address", "password");
+                  let errorOrData = validateSignIn(
+                    emailInputRef,
+                    passwordInputRef
+                  );
                   if (typeof errorOrData === "string") {
                     toast(errorOrData);
                   } else {
