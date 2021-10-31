@@ -4,20 +4,27 @@ import Card from "../components/cardUI/Card";
 import HotelCardList from "../components/hotelCardList/HotelCardList";
 import Scroll from "../components/scroll/scroll";
 import SearchBox from "../components/searchbox/searchbox";
-import { getMeCards } from "../helpers/fetcher";
+import { getMeCards, deleteCard } from "../helpers/fetcher";
 
 export default function ProfilePage({ user }) {
   const history = useHistory();
   const [myCards, setMyCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [searchfield, setSearchfield] = React.useState("");
+  const token = localStorage.getItem("token");
   React.useEffect(() => {
     setIsLoading(true);
-    getMeCards(localStorage.getItem("token"), (data) => {
+    getMeCards(token, (data) => {
       setMyCards(data);
     });
     setIsLoading(false);
-  }, []);
+  }, [token]);
+
+  function deleteCardHandler(id) {
+    deleteCard(id, token, () => {
+      setMyCards(myCards.filter((card) => id !== card._id));
+    });
+  }
 
   function onSearchChange(event) {
     setSearchfield(event.target.value);
@@ -58,7 +65,12 @@ export default function ProfilePage({ user }) {
           <SearchBox searchChange={onSearchChange} />
           <br />
           <Scroll>
-            <HotelCardList cards={filteredCards} delOption={true} user={user} />
+            <HotelCardList
+              cards={filteredCards}
+              delOption={true}
+              user={user}
+              deleteCardHandler={deleteCardHandler}
+            />
           </Scroll>
         </>
       ) : null}

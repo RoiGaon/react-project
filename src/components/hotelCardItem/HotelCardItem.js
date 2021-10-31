@@ -12,6 +12,7 @@ export default function HotelCardItem({
   bizDescription,
   user,
   delOption,
+  deleteCardHandler,
 }) {
   const favoritesCtx = useContext(FavoritesContext);
   const itemIsFavorite = favoritesCtx.isItemFavorite(_id);
@@ -52,7 +53,7 @@ export default function HotelCardItem({
         <br />
         {user.biz && delOption ? (
           <div className={classes.actions}>
-            <button onClick={() => {}}>Delete Card</button>
+            <button onClick={() => deleteCardHandler(_id)}>Delete Card</button>
           </div>
         ) : null}
       </div>

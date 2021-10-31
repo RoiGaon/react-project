@@ -1,6 +1,11 @@
 import HotelCardItem from "../hotelCardItem/HotelCardItem";
 
-export default function HotelCardList({ cards, user, delOption }) {
+export default function HotelCardList({
+  cards,
+  user,
+  delOption,
+  deleteCardHandler,
+}) {
   return (
     <div className="tc">
       {cards.map((card) => (
@@ -14,6 +19,7 @@ export default function HotelCardList({ cards, user, delOption }) {
           bizDescription={card.bizDescription}
           user={user}
           delOption={delOption}
+          deleteCardHandler={deleteCardHandler}
         />
       ))}
     </div>
