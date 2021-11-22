@@ -12,6 +12,7 @@ import { BiRegistered } from "react-icons/bi";
 import { BsPersonBoundingBox } from "react-icons/bs";
 import { FaSignInAlt } from "react-icons/fa";
 import ProfilePage from "../../pages/ProfilePage";
+import SingleCardPage from "../../pages/SingleCardPage";
 
 export const tabs = [
   {
@@ -67,5 +68,10 @@ export const tabs = [
     page: RegisterPage,
     loggedIn: false,
     icon: <BiRegistered></BiRegistered>,
+  },
+  {
+    href: "/:id",
+    page: SingleCardPage,
+    loggedIn: true,
   },
 ];

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const FavoritesContext = createContext({
   favorites: [],
@@ -10,20 +10,38 @@ const FavoritesContext = createContext({
 
 export function FavoritesContextProvider(props) {
   const [userFavorites, setUserFavorites] = useState([]);
+  const token = localStorage.getItem("token");
 
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/api/users/cards/favorites")
-  //     .then((response) => response.json())
-  //     .then((data) => setUserFavorites(data));
-  //   return () => {
-  //     console.log("cleanUp");
-  //   };
-  // }, [userFavorites]);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/users/cards/favorites", {
+      headers: { "x-auth-token": token },
+    })
+      .then((response) => response.json())
+      .then((data) => setUserFavorites(data));
+    return () => {
+      console.log("cleanUp");
+    };
+  }, [token]);
 
   function addFavoritesHandler(favoriteCard) {
-    setUserFavorites((prevUserFavorites) => {
-      return prevUserFavorites.concat(favoriteCard);
-    });
+    fetch(
+      `http://localhost:3000/api/users/cards/${favoriteCard._id}/favorites`,
+      {
+        method: "POST",
+        body: JSON.stringify(favoriteCard),
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": token,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) =>
+        setUserFavorites((prevUserFavorites) => {
+          return prevUserFavorites.concat(data);
+        })
+      )
+      .catch((error) => console.log(error));
   }
 
   function removeFavoritesHandler(cardId) {
@@ -52,20 +70,3 @@ export function FavoritesContextProvider(props) {
 }
 
 export default FavoritesContext;
-
-// function addFavoritesHandler(favoriteCard) {
-//   fetch("http://localhost:3000/api/users/cards/favorites", {
-//     method: "POST",
-//     body: JSON.stringify(favoriteCard),
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) =>
-//       setUserFavorites((prevUserFavorites) => {
-//         return prevUserFavorites.concat(data);
-//       })
-//     )
-//     .catch((error) => console.log(error));
-// }

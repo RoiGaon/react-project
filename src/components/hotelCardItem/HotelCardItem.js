@@ -2,6 +2,9 @@ import { useContext } from "react";
 import FavoritesContext from "../../contextStore/favoritesContext";
 import Card from "../cardUI/Card";
 import classes from "./HotelCardItem.module.css";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { BsThreeDots } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function HotelCardItem({
   _id,
@@ -46,16 +49,27 @@ export default function HotelCardItem({
           <p>{bizDescription}</p>
         </div>
         <div className={classes.actions}>
-          <button onClick={toggleFavoritesStatusHandler}>
+          <button className="grow" onClick={toggleFavoritesStatusHandler}>
             {itemIsFavorite ? "Remove From Favorites" : "Add To Favorites"}
           </button>
+          {user.biz && delOption ? (
+            <button
+              title="delete"
+              className={`${classes.button} grow`}
+              onClick={() => deleteCardHandler(_id)}
+            >
+              <RiDeleteBinLine />
+            </button>
+          ) : null}
+          <Link to={`/${_id}`}>
+            <button
+              className={`${classes.button} grow`}
+              title="see card's page"
+            >
+              <BsThreeDots />
+            </button>
+          </Link>
         </div>
-        <br />
-        {user.biz && delOption ? (
-          <div className={classes.actions}>
-            <button onClick={() => deleteCardHandler(_id)}>Delete Card</button>
-          </div>
-        ) : null}
       </div>
     </Card>
   );
